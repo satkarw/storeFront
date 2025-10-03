@@ -19,13 +19,17 @@ import debug_toolbar
 from django.urls import path, include
 from django.http import HttpResponse
 
+
+admin.site.site_header = "Storefront Admin"
+admin.site.index_title = 'Admin'
+
 def sayHello(request):
     return HttpResponse("hello")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',sayHello),
-    path('playground/',include('playground.urls')),
+    path('store/',include('store.urls')),
     path('__debug__/',include(debug_toolbar.urls)),
 ]
 

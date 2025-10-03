@@ -1,9 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <div class="main h-screen p-8">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                Product Inventory
+            </h1>
+            
+            <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 overflow-hidden shadow-2xl">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gradient-to-r from-slate-800 to-slate-700 border-b border-slate-600">
+                            <th class="text-left py-4 px-6 font-semibold text-slate-200 uppercase tracking-wide">Title</th>
+                            <th class="text-left py-4 px-6 font-semibold text-slate-200 uppercase tracking-wide">Unit Price</th>
+                            <th class="text-left py-4 px-6 font-semibold text-slate-200 uppercase tracking-wide">Inventory</th>
+                            <!-- <th class="text-left py-4 px-6 font-semibold text-slate-200 uppercase tracking-wide">Extra</th> -->
+                        </tr>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-700/50">
+                        {% for product in products %}
+                        <tr class="hover:bg-slate-700/30 transition-colors duration-200">
+                            <td class="py-4 px-6 text-slate-100 font-medium">{{product.title}}</td>
+                            <td class="py-4 px-6 text-green-400 font-semibold">${{product.unit_price}}</td>
+                            <td class="py-4 px-6 text-blue-400 font-medium">{{product.inventory}} units</td>
+                            <!-- <td  class="py-4 px-6 text-blue-400 font-medium" > {{product.collection.title}} </td> -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-<body>
-    
-    <h1>Hello world</h1>
-    
+            <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 overflow-hidden shadow-2xl">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gradient-to-r from-slate-800 to-slate-700 border-b border-slate-600">
+                            <th class="text-left py-4 px-6 font-semibold text-slate-200 uppercase tracking-wide">Id</th>
+                            <th class="text-left py-4 px-6 font-semibold text-slate-200 uppercase tracking-wide">Customer</th>
+                            <th class="text-left py-4 px-6 font-semibold text-slate-200 uppercase tracking-wide">quantity</th>
+                            <!-- <th class="text-left py-4 px-6 font-semibold text-slate-200 uppercase tracking-wide">Extra</th> -->
+                        </tr>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-700/50">
+                        {% for order in orders %}
+                            {% for item in order.orderitem_set.all %}
+                        <tr class="hover:bg-slate-700/30 transition-colors duration-200">
+                            <td class="py-4 px-6 text-slate-100 font-medium">{{order.id}}</td>
+                            <td class="py-4 px-6 text-green-400 font-semibold">{{order.customer.first_name}}</td>
+                            <td class="py-4 px-6 text-blue-400 font-medium">{{item.product.title }} </td>
+                            <!-- <td  class="py-4 px-6 text-blue-400 font-medium" > {{product.collection.title}} </td> -->
+                        </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+            <h1>{{result}}</h1>
+             
+        </div>
+    </div>
 </body>
 </html>

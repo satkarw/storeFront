@@ -10,9 +10,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='address',
-            name='zip',
-            field=models.CharField(max_length=100, null=True),
-        ),
     ]
